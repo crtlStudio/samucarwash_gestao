@@ -1,0 +1,161 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 10;
+}
+
+.painel {
+  background: white;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 16px 16px 0 0;
+  padding: 20px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.painelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.fechar {
+  border: none;
+  background: #f1f1f1;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.resumo {
+  display: flex;
+  justify-content: space-between;
+  background: #f8f9fb;
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 16px;
+}
+
+.resumo > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.resumoLabel {
+  font-size: 0.75rem;
+  color: #667;
+}
+
+.entrada {
+  color: #16a34a;
+  font-weight: 700;
+}
+
+.saida {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.semMovimentos {
+  color: #667;
+}
+
+.lista {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+}
+
+.descricao {
+  font-weight: 600;
+}
+
+.data {
+  font-size: 0.8rem;
+  color: #667;
+}
+
+.itemDireita {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.itemAcoes {
+  display: flex;
+  gap: 4px;
+}
+
+.acaoIcone {
+  border: none;
+  background: #f1f1f1;
+  border-radius: 8px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.acaoIcone:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.edicao {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.edInput,
+.edInputValor {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: inherit;
+}
+
+.edAcoes {
+  display: flex;
+  gap: 8px;
+}
+
+.edGuardar {
+  flex: 1;
+  padding: 8px;
+  background: #16a34a;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.edCancelar {
+  flex: 1;
+  padding: 8px;
+  background: #f1f1f1;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}

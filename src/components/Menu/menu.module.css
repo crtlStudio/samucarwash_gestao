@@ -1,0 +1,73 @@
+.container{
+
+    width: 100%;
+    background-color: rgb(2, 40, 97);
+    height: 60px;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.iconeContent{
+
+    width: 50px;
+    margin-left: 15px;
+    padding: 5px;
+}
+
+.icone{
+
+    width: 100%;
+}
+
+.tituloContent{
+
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    align-items: start;
+    justify-content: center;
+}
+
+.titulo{
+
+    color: white;
+    font-size: 1.1rem;
+}
+
+.subtitulo{
+
+    color: rgb(106, 199, 236);
+}
+
+.labelContent{
+
+    background-color: rgb(46, 70, 107);
+    border-radius: 12px;
+    margin: 0px 10px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+
+}
+
+.desc{
+
+    color: rgba(255, 255, 255, 0.66);
+    font-size: 0.7rem;
+    margin: 5px 0px 5px 8px;
+}
+
+.saldoPositivo {
+
+  color: #44dd7c;
+  font-weight: 700;
+  margin: 0px 0px 5px 8px;
+}
+
+.saldoNegativo {
+
+  color: #dc2626;
+  font-weight: 700;
+  margin: 0px 0px 5px 8px;
+}

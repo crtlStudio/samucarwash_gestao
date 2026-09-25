@@ -1,0 +1,354 @@
+.container {
+
+    max-width: 900px;
+    margin: 15px 10px 5px 10px;
+    padding: 20px;
+    border: 1px solid rgba(2, 40, 97, 0.176);
+    border-radius: 8px;
+    box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.077);
+}
+
+.topContent{
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.titulo {
+
+    font-size: 1.3rem;
+}
+
+.subtitulo {
+
+  color: rgb(2, 40, 97);
+  margin-bottom: 10px;
+  font-size: 0.8rem;
+
+}
+
+.notificacaoLabel {
+
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #dc2626;
+    background: rgba(220, 38, 38, 0.12);
+    border: 1px solid #dc2626;
+    border-radius: 8px;
+    padding: 2px 8px;
+    margin-top: 4px;
+    text-align: center;
+}
+
+.navMes {
+
+    display: grid;
+    grid-template-columns: 1fr 6fr 1fr;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.mes {
+
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 1.2rem;
+    color: rgb(2, 40, 97);
+}
+
+.seta {
+
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.cabecalho {
+
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    color:rgb(2, 40, 97);
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 0.8rem;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgba(2, 40, 97, 0.206);
+}
+
+.grelha {
+
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+.celula {
+
+    min-height: 52px;
+    border: 1px solid rgba(198, 203, 210, 0.367);
+    border-radius: 8px;
+    padding: 6px;
+    background: rgba(244, 244, 245, 0.695);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    color: rgb(2, 40, 97);
+}
+
+.foraDoMes {
+
+  background: #faf9f967;
+  opacity: 0.5;
+}
+
+.numeroDia {
+
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.hoje {
+
+  background: rgb(2, 40, 97);
+  color: white;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+}
+
+.pontos {
+  display: flex;
+  gap: 3px;
+}
+
+.ponto {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.cor_azul { background: #2563eb; }
+.cor_verde { background: #16a34a; }
+.cor_roxo { background: #9333ea; }
+
+
+
+
+
+
+
+
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 10;
+    
+}
+
+.painel {
+    background: white;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 16px 16px 0 0;
+    padding: 20px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.painelHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    
+}
+
+.painelHeader h3 {
+
+    text-transform: capitalize;
+}
+
+.fechar {
+    border: none;
+    background: #f1f1f1;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    
+}
+
+.semReservas {
+
+    color: #667;
+}
+
+.listaReservas {
+
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.itemReserva {
+
+    display: grid;
+    grid-template-rows: 0.5fr 1fr 1fr;
+    align-items: start;
+    justify-content: start;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    
+}
+
+.itemTopo {
+
+    display: grid;
+    grid-template-columns: 1fr 2fr 1.2fr;
+    align-items: start;
+    justify-content: start;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.hora{
+
+  display: flex;
+  align-items: center;
+  gap: 5px
+}
+
+.horaReserva {
+
+    font-weight: 700;
+}
+
+
+
+.pontoLista {
+
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+
+
+.nomeServico {
+
+    color: #072764;
+    font-weight: 700;
+}
+
+
+
+
+
+.itemDados {
+
+  font-size: 0.85rem;
+  color: #444;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+}
+
+.badgePendente {
+  margin-left: auto;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #b45309;
+  background: #fef3c7;
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+
+.badgeConfirmada {
+  margin-left: auto;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #15803d;
+  background: #dcfce7;
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+
+.aceitar {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  background-color: #16a34a;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.aceitar:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pendente {
+  border-color: #c00a0a73;
+  border-width: 1px;
+}
+
+.emAndamento {
+  border-color: #2563eb;
+  border-width: 2px;
+}
+
+.finalizar {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  background-color: #2563eb;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.finalizar:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.badgeCompleta {
+  margin-left: auto;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #1d4ed8;
+  background: #dbeafe;
+  padding: 2px 8px;
+  border-radius: 8px;
+}

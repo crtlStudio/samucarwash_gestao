@@ -1,0 +1,76 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 10;
+}
+
+.painel {
+  background: white;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 16px 16px 0 0;
+  padding: 20px;
+}
+
+.painelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.fechar {
+  border: none;
+  background: #f1f1f1;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #444;
+  margin-top: 10px;
+}
+
+.form input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.confirmar {
+  margin-top: 20px;
+  padding: 14px;
+  background-color: #dc2626;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.confirmar:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.erro {
+  color: rgb(236, 3, 3);
+  font-size: 0.85rem;
+  margin-top: 10px;
+}
