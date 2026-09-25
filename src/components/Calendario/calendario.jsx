@@ -54,6 +54,7 @@ export default function Calendario({ aoAtualizar }) {
   const [aAceitar, setAAceitar] = useState(null) // id da reserva a ser aceite
   const [aFinalizar, setAFinalizar] = useState(null) // id do serviço a ser finalizado
   const [aRejeitar, setARejeitar] = useState(null)
+  const [aApagar, setAApagar] = useState(null)
 
   const dias = gerarGrelha(ano, mes)
 
@@ -187,6 +188,24 @@ export default function Calendario({ aoAtualizar }) {
     const mensagem = 'Marcação rejeitada.'
     const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`
     window.open(url, '_blank', 'noopener,noreferrer')
+}
+
+async function apagarMarcacao(m) {
+    if (!window.confirm('Apagar esta marcação? Esta ação não pode ser desfeita.')) return
+
+    setAApagar(m.id)
+
+    const { error } = await supabase.rpc('cancel_booking_admin', { p_id: m.id })
+
+    setAApagar(null)
+
+    if (error) {
+        console.error('Erro ao apagar marcação:', error)
+        return
+    }
+
+    setMarcacoes((atual) => atual.filter((x) => x.id !== m.id))
+    aoAtualizar?.()
 }
 
   return (
@@ -330,6 +349,14 @@ export default function Calendario({ aoAtualizar }) {
                             </button>
                         </div>
                     )}
+
+                    <button
+                          onClick={() => apagarMarcacao(m)}
+                          disabled={aApagar === m.id}
+                          className={styles.apagar}
+                      >
+                          {aApagar === m.id ? 'A apagar...' : 'Apagar marcação'}
+                      </button>
                   </li>
                 ))}
               </ul>
