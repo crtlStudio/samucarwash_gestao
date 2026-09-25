@@ -153,6 +153,15 @@ export default function Calendario({ aoAtualizar }) {
     aoAtualizar?.()
   }
 
+  function notificarCliente(m) {          // ← nova, aqui
+    const linkCalendario = paraGoogleCalendar(m)
+    const mensagem = `Reserva confirmada, obrigado pela preferência!\n\nAdicionar ao calendário: ${linkCalendario}`
+    const numero = paraWhatsapp(m.telefone)
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`
+    window.open(url, '_blank', 'noopener,noreferrer')
+}
+
+
   const totalPendentes = marcacoes.filter((m) => m.status === 'pending').length
   const marcacoesPainel = diaAberto ? marcacoesDoDia(diaAberto) : []
 
@@ -308,13 +317,18 @@ export default function Calendario({ aoAtualizar }) {
                   )}
 
                     {m.status === 'confirmed' && (
-                      <button
-                        onClick={() => finalizarServico(m)}
-                        disabled={aFinalizar === m.id}
-                        className={styles.finalizar}
-                      >
-                        {aFinalizar === m.id ? 'A finalizar...' : 'Finalizar serviço'}
-                      </button>
+                        <div className={styles.acoesConfirmada}>
+                            <button onClick={() => notificarCliente(m)} className={styles.notificar}>
+                                Enviar notificação
+                            </button>
+                            <button
+                                onClick={() => finalizarServico(m)}
+                                disabled={aFinalizar === m.id}
+                                className={styles.finalizar}
+                            >
+                                {aFinalizar === m.id ? 'A finalizar...' : 'Finalizar serviço'}
+                            </button>
+                        </div>
                     )}
                   </li>
                 ))}

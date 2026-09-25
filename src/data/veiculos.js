@@ -22,7 +22,7 @@ export const VEICULOS = {
   'Honda': ['Jazz', 'Civic', 'HR-V', 'CR-V', 'e:Ny1'],
   'Skoda': ['Fabia', 'Scala', 'Octavia', 'Kamiq', 'Karoq', 'Kodiaq', 'Enyaq'],
   'Mitsubishi': ['Space Star', 'ASX', 'Eclipse Cross', 'Outlander'],
-  'MG': ['MG3', 'ZS', 'ZS EV', 'MG4', 'HS', 'Marvel R'],
+  'MG': ['MG3', 'ZTT', 'ZS', 'ZS EV', 'MG4', 'HS', 'Marvel R'],
   'BYD': ['Dolphin', 'Atto 3', 'Seal', 'Seal U', 'Han', 'Tang'],
   'Jeep': ['Renegade', 'Compass', 'Avenger', 'Cherokee', 'Grand Cherokee'],
   'Cupra': ['Born', 'Formentor', 'Leon', 'Ateca', 'Tavascan'],
