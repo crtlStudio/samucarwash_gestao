@@ -352,3 +352,30 @@
   padding: 2px 8px;
   border-radius: 8px;
 }
+
+.acoesPendente {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.acoesPendente .aceitar {
+  margin-top: 0;
+  flex: 1;
+}
+
+.rejeitar {
+  flex: 1;
+  padding: 10px;
+  background-color: #dc2626;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.rejeitar:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../../lib/supabase'
 import styles from './calendario.module.css'
 
+
 const DIAS_SEMANA = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom']
 
 const COR_POR_SERVICO = {
@@ -52,6 +53,7 @@ export default function Calendario({ aoAtualizar }) {
   const [marcacoes, setMarcacoes] = useState([])
   const [aAceitar, setAAceitar] = useState(null) // id da reserva a ser aceite
   const [aFinalizar, setAFinalizar] = useState(null) // id do serviço a ser finalizado
+  const [aRejeitar, setARejeitar] = useState(null)
 
   const dias = gerarGrelha(ano, mes)
 
@@ -153,6 +155,30 @@ export default function Calendario({ aoAtualizar }) {
 
   const totalPendentes = marcacoes.filter((m) => m.status === 'pending').length
   const marcacoesPainel = diaAberto ? marcacoesDoDia(diaAberto) : []
+
+  async function rejeitarReserva(m) {
+    if (!window.confirm('Rejeitar esta marcação?')) return
+
+    setARejeitar(m.id)
+
+    const { error } = await supabase.rpc('cancel_booking_admin', { p_id: m.id })
+
+    setARejeitar(null)
+
+    if (error) {
+        console.error('Erro ao rejeitar marcação:', error)
+        return
+    }
+
+    setMarcacoes((atual) => atual.filter((x) => x.id !== m.id))
+
+    aoAtualizar?.()
+
+    const numero = paraWhatsapp(m.telefone)
+    const mensagem = 'Marcação rejeitada.'
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`
+    window.open(url, '_blank', 'noopener,noreferrer')
+}
 
   return (
     <div className={styles.container}>
@@ -263,14 +289,23 @@ export default function Calendario({ aoAtualizar }) {
                     </div>
 
                     {m.status === 'pending' && (
-                      <button
-                        onClick={() => aceitarReserva(m)}
-                        disabled={aAceitar === m.id}
-                        className={styles.aceitar}
-                      >
-                        {aAceitar === m.id ? 'A aceitar...' : 'Aceitar reserva'}
-                      </button>
-                    )}
+                      <div className={styles.acoesPendente}>
+                          <button
+                              onClick={() => aceitarReserva(m)}
+                              disabled={aAceitar === m.id || aRejeitar === m.id}
+                              className={styles.aceitar}
+                          >
+                              {aAceitar === m.id ? 'A aceitar...' : 'Aceitar reserva'}
+                          </button>
+                          <button
+                              onClick={() => rejeitarReserva(m)}
+                              disabled={aAceitar === m.id || aRejeitar === m.id}
+                              className={styles.rejeitar}
+                          >
+                              {aRejeitar === m.id ? 'A rejeitar...' : 'Rejeitar'}
+                          </button>
+                      </div>
+                  )}
 
                     {m.status === 'confirmed' && (
                       <button

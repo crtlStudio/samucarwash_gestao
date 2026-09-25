@@ -1,7 +1,7 @@
 // Marcas e modelos para as caixas de seleção do formulário
 // Formato: 'Marca': ['Modelo 1', 'Modelo 2', ...]
 export const VEICULOS = {
-  'Peugeot': ['108', '208', '2008', '308', '3008', '5008', '508', 'Partner', 'Rifter'],
+  'Peugeot': ['108', '206', '208', '2008', '308', '3008', '5008', '508', 'Partner', 'Rifter'],
   'Renault': ['Clio', 'Captur', 'Megane', 'Arkana', 'Austral', 'Scenic', 'Zoe'],
   'Dacia': ['Sandero', 'Duster', 'Jogger', 'Logan', 'Spring'],
   'Mercedes-Benz': ['Classe A', 'Classe B', 'Classe C', 'Classe E', 'GLA', 'GLB', 'GLC', 'EQA', 'EQB'],
