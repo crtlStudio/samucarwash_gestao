@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../../lib/supabase'
-import styles from './Novamarcacaoform.module.css'
+import styles from './Novamarcacaoform.module.CSS'
 import { VEICULOS } from '../../data/veiculos'
 
 
