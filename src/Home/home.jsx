@@ -9,7 +9,7 @@ import NovaMarcacaoForm from '../components/NovaMarcacaoForm/novaMarcacaoForm'
 import { supabase } from '../lib/supabase'
 import { FaCar } from "react-icons/fa6";
 import { LuListFilter } from "react-icons/lu";
-import NovoVeiculoForm from '../components/NovoVeiculoForm/novaMarcacaoForm'
+import NovoVeiculoForm from '../components/NovoVeiculoForm/novoVeiculoForm'
 import Filtros from '../components/Filtros/filtros'
 
 

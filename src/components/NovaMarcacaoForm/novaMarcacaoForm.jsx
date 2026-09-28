@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../../lib/supabase'
-import NovoVeiculoForm from '../NovoVeiculoForm/novaMarcacaoForm'
+import NovoVeiculoForm from '../NovoVeiculoForm/novoVeiculoForm'
 import styles from './novaMarcacaoForm.module.css'
 
 export default function NovaMarcacaoForm({ aoFechar, aoGuardar }) {
