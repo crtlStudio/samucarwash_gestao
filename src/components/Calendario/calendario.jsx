@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../../lib/supabase'
 import styles from './calendario.module.css'
+import BloqueioForm from '../BloqueioForm/Bloqueioform'
+
+
 
 
 const DIAS_SEMANA = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom']
@@ -47,6 +50,7 @@ function paraGoogleCalendar(m) {
 
 export default function Calendario({ aoAtualizar }) {
   const hoje = new Date()
+  const [mostrarBloqueio, setMostrarBloqueio] = useState(false)
   const [ano, setAno] = useState(hoje.getFullYear())
   const [mes, setMes] = useState(hoje.getMonth())
   const [diaAberto, setDiaAberto] = useState(null)
@@ -217,6 +221,10 @@ async function apagarMarcacao(m) {
           )}
       </div>
 
+      <button onClick={() => setMostrarBloqueio(true)} className={styles.botton2}>
+        Bloquear horas ou dia(s)
+      </button>
+
       <div className={styles.navMes}>
         <button onClick={() => mudarMes(-1)} className={styles.seta}>‹</button>
         <h2 className={styles.mes}>
@@ -364,6 +372,8 @@ async function apagarMarcacao(m) {
           </div>
         </div>
       )}
+
+      {mostrarBloqueio && <BloqueioForm aoFechar={() => setMostrarBloqueio(false)} />}
     </div>
   )
 }
