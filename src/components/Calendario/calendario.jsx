@@ -333,7 +333,7 @@ async function apagarMarcacao(m) {
                               {aRejeitar === m.id ? 'A rejeitar...' : 'Rejeitar'}
                           </button>
                       </div>
-                  )}
+                    )}
 
                     {m.status === 'confirmed' && (
                         <div className={styles.acoesConfirmada}>

@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../../lib/supabase'
+import NovoVeiculoForm from '../NovoVeiculoForm/novaMarcacaoForm'
 import styles from './novaMarcacaoForm.module.css'
-import { VEICULOS } from '../../data/veiculos'
-
-
-
-
 
 export default function NovaMarcacaoForm({ aoFechar, aoGuardar }) {
     const [servicos, setServicos] = useState([])
@@ -19,6 +15,9 @@ export default function NovaMarcacaoForm({ aoFechar, aoGuardar }) {
     const [erro, setErro] = useState('')
     const [marca, setMarca] = useState('')
     const [modelo, setModelo] = useState('')
+    const [veiculos, setVeiculos] = useState({})
+    const [veiculosKey, setVeiculosKey] = useState(0)
+    const [mostrarNovoVeiculo, setMostrarNovoVeiculo] = useState(false)
 
     useEffect(() => {
         supabase
@@ -35,6 +34,26 @@ export default function NovaMarcacaoForm({ aoFechar, aoGuardar }) {
                 if (data.length > 0) setServicoId(data[0].slug)
             })
     }, [])
+
+    useEffect(() => {
+        supabase
+            .from('vehicle_brands')
+            .select('name, vehicle_models(name)')
+            .order('name')
+            .then(({ data, error }) => {
+                if (error) {
+                    console.error('Erro ao carregar veículos:', error)
+                    return
+                }
+                const lista = {}
+                data.forEach((b) => {
+                    lista[b.name] = b.vehicle_models
+                        .map((m) => m.name)
+                        .sort((a, c) => a.localeCompare(c, 'pt', { numeric: true }))
+                })
+                setVeiculos(lista)
+            })
+    }, [veiculosKey])
 
     const podeGuardar =
         servicoId !== '' && data !== '' && hora !== '' && nome.trim() !== '' && telemovel.trim() !== ''
@@ -58,7 +77,7 @@ export default function NovaMarcacaoForm({ aoFechar, aoGuardar }) {
             p_service_slug: servicoId,
             p_starts_at: inicio.toISOString(),
             p_name: nome.trim(),
-            p_phone: telemovel.trim(), 
+            p_phone: telemovel.trim(),
             p_status: status,
             p_brand: marca.trim() || null,
             p_model: modelo.trim() || null,
@@ -80,7 +99,14 @@ export default function NovaMarcacaoForm({ aoFechar, aoGuardar }) {
         setModelo('') // ao mudar de marca, o modelo antigo deixa de valer
     }
 
+    function veiculoGuardado({ marca: novaMarca, modelo: novoModelo }) {
+        setVeiculosKey((k) => k + 1) // recarrega a lista
+        setMarca(novaMarca)
+        setModelo(novoModelo)
+    }
+
     return (
+        <>
         <div className={styles.overlay} onClick={aoFechar}>
             <div className={styles.painel} onClick={(e) => e.stopPropagation()}>
                 <div className={styles.painelHeader}>
@@ -142,7 +168,7 @@ export default function NovaMarcacaoForm({ aoFechar, aoGuardar }) {
                     <label htmlFor="marca">Marca (opcional)</label>
                     <select id="marca" value={marca} onChange={escolherMarca}>
                         <option value="">Marca</option>
-                        {Object.keys(VEICULOS).sort((a, b) => a.localeCompare(b, 'pt')).map((m) => (
+                        {Object.keys(veiculos).sort((a, b) => a.localeCompare(b, 'pt')).map((m) => (
                             <option key={m} value={m}>{m}</option>
                         ))}
                     </select>
@@ -155,10 +181,18 @@ export default function NovaMarcacaoForm({ aoFechar, aoGuardar }) {
                         disabled={!marca}
                     >
                         <option value="">Modelo</option>
-                        {(VEICULOS[marca] ?? []).map((m) => (
+                        {(veiculos[marca] ?? []).map((m) => (
                             <option key={m} value={m}>{m}</option>
                         ))}
                     </select>
+
+                    <button
+                        type="button"
+                        onClick={() => setMostrarNovoVeiculo(true)}
+                        className={styles.linkVeiculo}
+                    >
+                        Acrescentar marca ou modelo em falta
+                    </button>
 
                     <label htmlFor="status">Estado</label>
                     <select id="status" value={status} onChange={(e) => setStatus(e.target.value)}>
@@ -174,5 +208,13 @@ export default function NovaMarcacaoForm({ aoFechar, aoGuardar }) {
                 </form>
             </div>
         </div>
+
+        {mostrarNovoVeiculo && (
+            <NovoVeiculoForm
+                aoFechar={() => setMostrarNovoVeiculo(false)}
+                aoGuardar={veiculoGuardado}
+            />
+        )}
+        </>
     )
 }

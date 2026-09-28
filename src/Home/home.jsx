@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState} from 'react'
+import { Link } from "react-router-dom";
 import Calendario from '../components/Calendario/calendario'
 import Menu from '../components/Menu/menu'
 import styles from './home.module.css'
@@ -6,9 +7,12 @@ import DespesaForm from '../components/DespesaForm/despesaForm'
 import Movimentos from '../components/Movimentos/movimentos'
 import NovaMarcacaoForm from '../components/NovaMarcacaoForm/novaMarcacaoForm'
 import { supabase } from '../lib/supabase'
-import { IoMdAdd } from "react-icons/io";
-import { FaListUl } from "react-icons/fa";
-import { MdOutlinePlaylistAdd } from "react-icons/md";
+import { FaCar } from "react-icons/fa6";
+import { LuListFilter } from "react-icons/lu";
+import NovoVeiculoForm from '../components/NovoVeiculoForm/novaMarcacaoForm'
+import Filtros from '../components/Filtros/Filtros'
+
+
 
 
 
@@ -25,6 +29,10 @@ export default function Home() {
 
     const [marcacoesReceita, setMarcacoesReceita] = useState([])
     const [despesas, setDespesas] = useState([])
+
+    const [mostrarNovoVeiculo, setMostrarNovoVeiculo] = useState(false)
+
+    const [mostrarFiltros, setMostrarFiltros] = useState(false)
 
     useEffect(() => {
         supabase
@@ -86,20 +94,19 @@ export default function Home() {
         <>
         <section className={styles.container} />
             <Menu saldo={saldo} />
-            <div className={styles.bottonContent}>
-                <button onClick={() => setMostrarDespesa(true)} className={styles.botton}>
-                    <IoMdAdd className={styles.add} />
-                    Despesa
-                </button>
-                <button onClick={() => setMostrarMovimentos(true)} className={styles.botton2}>
-                    <FaListUl className={styles.mov} />
-                    Movimentos
-                </button>
-                <button onClick={() => setMostrarNovaMarcacao(true)} className={styles.botton3}>
-                    <MdOutlinePlaylistAdd className={styles.book} />
-                    Marcação
-                </button>
-            </div>
+            <nav className={styles.menuContent}>
+                <div className={styles.menu}>
+                    <Link onClick={() => setMostrarDespesa(true)} className={styles.link}>Despesa</Link>
+
+                    <Link onClick={() => setMostrarMovimentos(true)} className={styles.link}>Movimentos</Link>
+
+                    <Link onClick={() => setMostrarNovaMarcacao(true)} className={styles.link}>Marcação</Link>
+
+                    <Link onClick={() => setMostrarFiltros(true)} className={styles.link}><LuListFilter className={styles.filter} /></Link>
+
+                    <Link onClick={() => setMostrarNovoVeiculo(true)} className={styles.link}><FaCar className={styles.car} /></Link>
+                </div>
+            </nav>
 
             <Calendario
                 key={calendarioKey}
@@ -128,6 +135,12 @@ export default function Home() {
                     aoGuardar={marcacaoGuardada}
                 />
             )}
+
+            {mostrarNovoVeiculo && (
+                <NovoVeiculoForm aoFechar={() => setMostrarNovoVeiculo(false)} />
+            )}
+
+            {mostrarFiltros && <Filtros aoFechar={() => setMostrarFiltros(false)} />}
         <section/>
         </>
     )
