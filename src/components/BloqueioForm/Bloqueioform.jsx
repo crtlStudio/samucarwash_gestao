@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../../lib/supabase'
-import styles from './BloqueioForm.module.css'
+import styles from './Bloqueioform.module.css'
 
 
 
