@@ -103,6 +103,26 @@ export default function PacksForm({ aoFechar, aoAtualizar }) {
         aoAtualizar?.()
     }
 
+    async function apagar(p) {
+        if (!window.confirm(`Apagar o pack "${p.name}"? Esta ação não pode ser desfeita.`)) return
+
+        setErro('')
+        const { error } = await supabase.rpc('delete_service', { p_id: p.id })
+
+        if (error) {
+            console.error('Erro ao apagar pack:', error)
+            setErro(
+                error.message.includes('service_in_use')
+                    ? `"${p.name}" já tem marcações e não pode ser apagado. Desativa-o em vez disso.`
+                    : 'Não foi possível apagar. Tenta outra vez.'
+            )
+            return
+        }
+
+        await carregar()
+        aoAtualizar?.()
+    }
+
     return (
         <div className={styles.overlay} onClick={aoFechar}>
             <div className={styles.painel} onClick={(e) => e.stopPropagation()}>
@@ -124,6 +144,9 @@ export default function PacksForm({ aoFechar, aoAtualizar }) {
                                         <button type="button" onClick={() => editar(p)}>Editar</button>
                                         <button type="button" onClick={() => alternarAtivo(p)}>
                                             {p.active ? 'Desativar' : 'Ativar'}
+                                        </button>
+                                        <button type="button" className={styles.apagar} onClick={() => apagar(p)}>
+                                            Apagar
                                         </button>
                                     </div>
                                 </li>

@@ -151,3 +151,9 @@
   font-weight: 600;
   cursor: pointer;
 }
+
+.acoes button.apagar {
+  color: #dc2626;
+  border-color: #f3c4c4;
+  background: #fff5f5;
+}
