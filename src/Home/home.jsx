@@ -10,7 +10,7 @@ import { supabase } from '../lib/supabase'
 import { FaCar } from "react-icons/fa6";
 import { LuListFilter, LuPackage, LuMenu } from "react-icons/lu";
 import NovoVeiculoForm from '../components/NovoVeiculoForm/novoVeiculoForm'
-import Filtros from '../components/Filtros/Filtros'
+import Filtros from '../components/Filtros/filtros'
 import PacksForm from '../components/PacksForm/packsForm'
 
 
