@@ -8,9 +8,10 @@ import Movimentos from '../components/Movimentos/movimentos'
 import NovaMarcacaoForm from '../components/NovaMarcacaoForm/novaMarcacaoForm'
 import { supabase } from '../lib/supabase'
 import { FaCar } from "react-icons/fa6";
-import { LuListFilter } from "react-icons/lu";
+import { LuListFilter, LuPackage, LuMenu } from "react-icons/lu";
 import NovoVeiculoForm from '../components/NovoVeiculoForm/novoVeiculoForm'
 import Filtros from '../components/Filtros/Filtros'
+import PacksForm from '../components/PacksForm/packsForm'
 
 
 
@@ -33,6 +34,10 @@ export default function Home() {
     const [mostrarNovoVeiculo, setMostrarNovoVeiculo] = useState(false)
 
     const [mostrarFiltros, setMostrarFiltros] = useState(false)
+
+    const [mostrarPacks, setMostrarPacks] = useState(false)
+
+    const [mostrarMenu, setMostrarMenu] = useState(false)
 
     useEffect(() => {
         supabase
@@ -102,9 +107,25 @@ export default function Home() {
 
                     <Link onClick={() => setMostrarNovaMarcacao(true)} className={styles.link}>Marcação</Link>
 
-                    <Link onClick={() => setMostrarFiltros(true)} className={styles.link}><LuListFilter className={styles.filter} /></Link>
+                    <div className={styles.hamburger}>
+                        <Link onClick={() => setMostrarMenu((v) => !v)} className={styles.link}>
+                            <LuMenu className={styles.car} />
+                        </Link>
 
-                    <Link onClick={() => setMostrarNovoVeiculo(true)} className={styles.link}><FaCar className={styles.car} /></Link>
+                        {mostrarMenu && (
+                            <div className={styles.dropdown}>
+                                <Link onClick={() => { setMostrarFiltros(true); setMostrarMenu(false) }} className={styles.dropItem}>
+                                    <LuListFilter className={styles.dropIcon} /> Filtros
+                                </Link>
+                                <Link onClick={() => { setMostrarNovoVeiculo(true); setMostrarMenu(false) }} className={styles.dropItem}>
+                                    <FaCar className={styles.dropIcon} /> Veículos
+                                </Link>
+                                <Link onClick={() => { setMostrarPacks(true); setMostrarMenu(false) }} className={styles.dropItem}>
+                                    <LuPackage className={styles.dropIcon} /> Packs
+                                </Link>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </nav>
 
@@ -141,6 +162,8 @@ export default function Home() {
             )}
 
             {mostrarFiltros && <Filtros aoFechar={() => setMostrarFiltros(false)} />}
+
+            {mostrarPacks && <PacksForm aoFechar={() => setMostrarPacks(false)} />}
         <section/>
         </>
     )

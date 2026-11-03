@@ -4,8 +4,6 @@ import styles from './calendario.module.css'
 import BloqueioForm from '../BloqueioForm/Bloqueioform'
 
 
-
-
 const DIAS_SEMANA = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom']
 
 const COR_POR_SERVICO = {
