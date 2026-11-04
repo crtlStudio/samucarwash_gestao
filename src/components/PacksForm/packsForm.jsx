@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../../lib/supabase'
 import styles from './packsForm.module.css'
 
-const VAZIO = { id: null, name: '', description: '', price: '', duration: '60', active: true }
+const VAZIO = { id: null, name: '', description: '', price: '', duration: '1', active: true }
 
 export default function PacksForm({ aoFechar, aoAtualizar }) {
     const [packs, setPacks] = useState([])
@@ -34,7 +34,7 @@ export default function PacksForm({ aoFechar, aoAtualizar }) {
             name: p.name,
             description: p.description ?? '',
             price: String(p.price),
-            duration: String(p.duration_minutes),
+            duration: String(p.duration_minutes/60),
             active: p.active,
         })
     }
@@ -44,7 +44,7 @@ export default function PacksForm({ aoFechar, aoAtualizar }) {
         edicao.name.trim() !== '' &&
         Number(edicao.price) >= 0 &&
         edicao.price !== '' &&
-        Number(edicao.duration) > 0
+           const duracao = Math.round(Number(String(edicao.duration).replace(',', '.')) * 60)
 
     async function guardar(e) {
         e.preventDefault()
@@ -198,16 +198,18 @@ export default function PacksForm({ aoFechar, aoAtualizar }) {
                             required
                         />
 
-                        <label htmlFor="packDuracao">Duração</label>
-                        <select
-                            id="packDuracao"
-                            value={edicao.duration}
-                            onChange={(e) => setEdicao({ ...edicao, duration: e.target.value })}
-                        >
-                            <option value="60">1 hora</option>
-                            <option value="120">2 horas</option>
-                            <option value="180">3 horas</option>
-                        </select>
+                           <label htmlFor="packDuracao">Duração (horas)</label>
+                               <input
+                                   id="packDuracao"
+                                   type="number"
+                                   inputMode="decimal"
+                                   step="0.25"
+                                   min="0.25"
+                                   value={edicao.duration}
+                                   onChange={(e) => setEdicao({ ...edicao, duration: e.target.value })}
+                                   placeholder="Ex: 1.5 para 1h30"
+                                   required
+                               />
 
                         {erro && <p className={styles.erro}>{erro}</p>}
 
